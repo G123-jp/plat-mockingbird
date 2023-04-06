@@ -35,6 +35,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
+app.get('/healthcheck', (req, res) => {
+  res.send({'status': 'ok'});
+});
+
 app.get('/ping', (req, res) => {
   res.send('pong');
 });
