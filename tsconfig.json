@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "es6",
+        "outDir": "dist",
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "strict": true,
+    },
+    "include": [
+        "frontend/*.ts",
+        "vite.config.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

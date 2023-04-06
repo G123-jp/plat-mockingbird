@@ -3,7 +3,7 @@ import { initializeFaro,
   getWebInstrumentations } from '@grafana/faro-web-sdk';
 import { TracingInstrumentation } from '@grafana/faro-web-tracing';
 
-initializeFaro({
+const faro = initializeFaro({
   url: 'http://localhost:12345/collect',
   apiKey: 'igaiMoo7uloh',
   instrumentations: [...getWebInstrumentations(), new TracingInstrumentation()],
@@ -13,7 +13,6 @@ initializeFaro({
   },
 });
 
-const faro = window.faro;
 //PUSH LOG
 faro.api.pushLog(['This is a log', 'With another message']);
 faro.api.pushLog(['This is a log'], { skipDedupe: true });
@@ -56,7 +55,7 @@ context.with(trace.setSpan(context.active(), span1), () => {
   span1.end();
 });
 
-function doSomething(msg) {
+function doSomething(msg: string) {
   console.log('doing ' + msg);
   faro.api.pushEvent('doing-something ' + msg);
   //sleep for 1 second
