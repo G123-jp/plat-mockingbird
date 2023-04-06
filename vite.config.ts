@@ -7,9 +7,10 @@ export default defineConfig({
     target: 'es2015',
     outDir: 'dist',
   },
-  root: path.resolve(__dirname, 'frontend'),
+  root: path.resolve('frontend'),
   optimizeDeps: {
-    include: ['@grafana/faro-web-sdk'], // Add this line
+    include: ['@grafana/faro-web-sdk',
+      '@grafana/faro-web-tracing'],
   },
 });
 
