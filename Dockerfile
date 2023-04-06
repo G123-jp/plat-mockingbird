@@ -11,11 +11,10 @@ RUN pnpm build
 # Production stage
 FROM registry.access.redhat.com/ubi9/ubi-minimal:9.1.0-1793 AS production
 WORKDIR /app
-COPY --from=build /app/app.js ./
-COPY --from=build /app/dist ./dist
-COPY vite.config.ts tsconfig.json package*.json ./
+COPY --from=build /app/ ./
+# COPY --from=build /app/dist ./dist
 RUN microdnf update -y && \
+    microdnf install -y nodejs && \
     microdnf clean all
-RUN microdnf install -y nodejs && \
-    npm install --production
+RUN npm install --production
 CMD ["npm", "start"]

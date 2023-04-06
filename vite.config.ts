@@ -4,7 +4,7 @@ import path from "path";
 export default defineConfig({
   build: {
     target: "es6",
-    outDir: "dist",
+    outDir: "../dist",
   },
   root: path.resolve("frontend"),
 });

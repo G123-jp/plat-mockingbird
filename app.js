@@ -4,11 +4,25 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-// Logging
-const pino = require('pino');
-const pinoHttp = require('pino-http')()
-const logger = pino({ level: 'info' });
-app.use(pinoHttp({ logger }));
+// Logging using pino-http
+const logger = require('pino-http')(
+  {
+    level: process.env.PINO_LOG_LEVEL || 'info',
+    serializers: {
+      req: (req) => ({
+        method: req.method,
+        url: req.url,
+        headers: req.headers,
+        remoteAddress: req.remoteAddress,
+        remotePort: req.remotePort,
+      }),
+      res: (res) => ({
+        statusCode: res.statusCode,
+      }),
+    }
+  },
+);
+app.use(logger);
 
 // Enable CORS for all routes
 app.use(cors());
