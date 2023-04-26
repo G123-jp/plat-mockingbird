@@ -16,7 +16,7 @@ COPY package.json ./
 RUN --mount=type=cache,target=/root/.cache \
     pnpm install --prefer-offline
 # copy over other files and compile
-COPY . . 
+COPY . .
 USER root
 RUN pnpm build
 
@@ -34,6 +34,6 @@ RUN --mount=type=cache,target=/root/.cache \
 FROM server AS production
 WORKDIR /app
 COPY --from=build /app/ ./
-RUN pnpm list express
 RUN pnpm install --prefer-offline --prod
-CMD ["pnpm", "start"]
+ENTRYPOINT ["pnpm", "start"]
+

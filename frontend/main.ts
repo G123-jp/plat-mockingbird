@@ -3,8 +3,11 @@ import { initializeFaro,
   getWebInstrumentations } from '@grafana/faro-web-sdk';
 import { TracingInstrumentation } from '@grafana/faro-web-tracing';
 
+const currentDomain = window.location.hostname;
+const currentPort = window.location.port;
+
 const faro = initializeFaro({
-  url: 'http://localhost:12345/collect',
+  url: `${window.location.protocol}//${currentDomain}:${currentPort}/collect`,
   apiKey: 'igaiMoo7uloh',
   instrumentations: [...getWebInstrumentations(), new TracingInstrumentation()],
   app: {
